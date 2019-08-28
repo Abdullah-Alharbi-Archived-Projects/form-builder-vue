@@ -3,7 +3,7 @@
     <h1>Hello, Builder</h1>
     <AddNew :schema="formSchema" :inputs="inputs" />
     <SendForm :inputs="inputs" @send-form="submitForm" />
-    <Form method="POST" :inputs="inputs" :schema="formSchema" />
+    <Form method="POST" :inputs="inputs" :schema="formSchema" @delete-form="deleteForm" />
   </div>
 </template>
 
@@ -28,6 +28,14 @@ export default {
   methods: {
     submitForm() {
       console.log("sending form data", this.inputs);
+    },
+    deleteForm(index) {
+      const inputs = [...this.inputs];
+      const newInputs = inputs.filter(
+        (input, inputIndex) => inputIndex !== index
+      );
+
+      this.inputs = [...newInputs];
     }
   }
 };
