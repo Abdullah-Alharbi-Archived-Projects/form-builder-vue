@@ -4,11 +4,11 @@
     <div v-for="(input, index) in inputs" :key="input.id">
       <DeleteForm :index="index" @delete-form="deleteForm" />
       <form :method="method">
-        <div v-for="(type, typeIndex) in schema.type" :key="typeIndex">
+        <div v-for="(field, fieldIndex) in schema.fields" :key="fieldIndex">
           <Input
-            :type="type"
-            :model="getPropName(input, typeIndex)"
-            :placeholder="schema.placeholder[typeIndex]"
+            :type="getType(fieldIndex)"
+            :model="getPropName(input, fieldIndex)"
+            :placeholder="schema.placeholder[fieldIndex]"
           />
         </div>
       </form>
@@ -29,6 +29,16 @@ export default {
     getPropName(object, index) {
       const props = Object.keys(object);
       return { object, props, index };
+    },
+    getType(index){
+      const { type } = this.schema;
+      if(typeof type !== 'string') {
+        // array
+        return type[index];
+      } else {
+        // string
+        return type;
+      }
     },
     deleteForm(index) {
       this.$emit("delete-form", index);
