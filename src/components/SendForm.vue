@@ -1,5 +1,5 @@
 <template>
-  <button @click.prevent="sendForm">Submut</button>
+  <button @click.prevent="sendForm">Submit</button>
 </template>
 
 <script>
@@ -8,8 +8,9 @@ export default {
   props: ["inputs"],
   methods: {
     sendForm() {
-      this.$emit("send-form");
+      // eslint-disable-next-line
       console.log("emitted event");
+      this.$emit("send-form");
     }
   }
 };
