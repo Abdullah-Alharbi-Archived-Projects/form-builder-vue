@@ -27,6 +27,7 @@ export default {
   components: { Form, AddNew, SendForm },
   methods: {
     submitForm() {
+      // eslint-disable-next-line
       console.log("sending form data", this.inputs);
     },
     deleteForm(index) {
